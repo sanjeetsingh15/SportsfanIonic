@@ -1,0 +1,31 @@
+<ion-view style="" title="League" ng-controller="teamsCtrl">
+<ion-nav-buttons side="right"  >
+      <!-- <input style="margin-top: -3px;" type="search" ng-model="obj.searchText"/> -->
+      <i style="color: white;font-size: 24px; padding: 5px 10px 5px 10px;" class="icon ion-home" ng-click="goHome()"></i>
+    </ion-nav-buttons>
+    <div class="toast-container" style="width: 100%; margin-top: 50px;"></div>
+    <ion-content class="has-header bk-fan" padding="true">
+     <ion-list id="news-feed-list" ng-repeat='x in teams' class="">
+                <ion-item style="" class="item" ng-click="infoTeam({{x.League.id}})">
+                <div class="item-inner">
+    <div width="60px" style="float:left;display:table; vertical-align:middle;">
+        <div  style="display: table-cell; vertical-align: middle;">
+            <div class="item-thum"  style="background-image:url('http://sportfan-app.netsol.local/sportfan/img/leagues/large/{{x.League.image}}'); background-repeat: no-repeat;background-position: center;"></div>
+        </div>
+    </div>
+    
+    <div>
+        <div>
+            <div class="item-title" style="line-height: 50px;">{{x.League.name| limitTo:65 }}{{x.League.name.length> 65 ? '...' : ''}}</div>
+        </div>
+    </div>
+    <div>
+        <i class="icon ion-chevron-right" style="line-height: 50px; font-size:30px; color:#fff;"></i>
+    </div>
+</div>
+                </ion-item>
+        </ion-list>
+<div style="width: 100%; float:left; height: 50px;" class="spacer"></div>
+    </ion-content>
+</ion-view>
+
