@@ -1,0 +1,16 @@
+<ion-view title="" hide-nav-bar="true" >
+<!-- Content Area Start Here -->
+    <ion-content padding="true" class="splashScrn" ng-controller="homeCtrl">
+    <div ng-if="globals.internet.connection">
+    
+    </div>
+        <div style="width: 300px; height: 22px;" class="spacer"></div>
+		<img class="logo" src="img/logo.png" style="padding: 0 0 0 35px;"/>
+		<div style="width: 300px; height: 282px;" class="spacer"></div>
+		<div style="" class="button-bar"></div>
+		<a class="button button-balanced button-block " ng-click="loginBtn()">Log In</a>
+		<a class="button button-balanced button-block " ng-click="signupBtn()">Sign Up</a>
+		<a class="button button-dark button-block" ng-click="guestBtn()">Browse As a Guest User</a>
+    </ion-content>
+<!-- Content Area End Here -->
+</ion-view>

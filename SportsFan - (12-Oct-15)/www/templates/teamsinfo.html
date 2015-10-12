@@ -1,0 +1,40 @@
+<ion-view style="" title="Teams" ng-controller="teamInfoCtrl">
+    <ion-nav-buttons side="right"  >
+      <i style="color: white;font-size: 24px; padding: 5px 10px 5px 10px;" class="icon ion-search" ng-click="searchMe()"></i>
+      <i style="color: white;font-size: 24px; padding: 5px 10px 5px 10px;" class="icon ion-home" ng-click="goHome()"></i>
+    </ion-nav-buttons>
+    <div class="toast-container" style="width: 100%; margin-top: 50px;"></div>
+    <ion-content class="has-header bk-fan" padding="true">
+        <div class="list list-inset " ng-if="!searchNewsText" style="margin-top: 0px;transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="Search" ng-model="obj.searchText" ng-blur="searchMe()"/>
+          </label>
+        </div>
+        <ion-list id="news-feed-list" ng-repeat='x in teamInfo  | filter:obj.searchText' class="">
+                <ion-item style="" class="item" >
+                <div class="item-inner">
+                    <div width="60px" style="float:left;display:table; vertical-align:middle;" >
+                        <div  style="display: table-cell; vertical-align: middle;">
+                            <div ng-click="infoTeamFeeds({{x}})" class="item-thum"  style="background-repeat: no-repeat;background-position: center; background-image:url('http://sportfan-app.netsol.local/sportfan/img/team_logo_upload/large/{{x.team_logo}}');"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div>
+                            <div class="item-title" style="line-height: 50px;" ng-click="infoTeamFeeds({{x}})">{{x.name| limitTo:65 }}{{x.name.length> 65 ? '...' : ''}}</div>
+                        </div>
+                    </div>
+                    <div ng-if="globals.currentUser.id">
+                         <i class="icon ion-plus-circled" ng-click="addTeam({{x}})" style="line-height: 50px; font-size:24px; color:#fff;"></i>
+                    </div>
+                    <div ng-if="!globals.currentUser.id">
+                        <i class="icon ion-chevron-right" style="line-height: 50px; font-size:32px; color:#fff;"></i>
+                    </div>
+                </div>
+                </ion-item>
+        </ion-list>
+        <div style="width: 100%; float:left; height: 50px;" class="spacer"></div>
+    </ion-content>
+</ion-view>
+
