@@ -1,12 +1,12 @@
-<ion-view style="" title="My Team">
+<ion-view style="" title="My Team" ng-controller="mysubscribeteamsCtrl">
     <div class="toast-container" style="width: 100%; margin-top: 50px;"></div>
-    <ion-content class="has-header bk-fan" padding="true" ng-controller="myteamCtrl" >
+    <ion-content class="has-header bk-fan" padding="true"  >
         <ion-list id="news-feed-list" ng-repeat='x in myteams' class="">
                 <ion-item style="" class="item" >
                 <div class="item-inner">
     <div width="60px" style="float:left;display:table; vertical-align:middle;">
         <div  style="display: table-cell; vertical-align: middle;">
-            <div class="item-thum" ng-click="infoTeamFeeds({{x.UserTeam}})" style="background-image:url('http://sportfan-app.netsol.local/sportfan/img/team_logo_upload/large/{{x.UserTeam.team_logo}}');"></div>
+            <div class="item-thum news-thum" ng-click="infoTeamFeeds({{x.UserTeam}})" style="background-image:url('http://sportfan-app.netsol.local/sportfan/img/team_logo_upload/large/{{x.UserTeam.team_logo}}');"></div>
         </div>
     </div>
     

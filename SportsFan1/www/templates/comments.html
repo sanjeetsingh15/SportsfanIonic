@@ -1,0 +1,46 @@
+<ion-view title="{{count}} Comment(s)" ng-controller="commentsController">
+    <ion-nav-buttons side="right"  >
+      <!-- <input style="margin-top: -3px;" type="search" ng-model="obj.searchText"/> -->
+      <i style="color: white;font-size: 24px; padding: 5px 10px 5px 10px;" class="icon ion-home" ng-click="goHome()"></i>
+    </ion-nav-buttons>
+<!-- For toast Messages -->
+    <div class="toast-container" style="width: 100%; margin-top: 50px;"></div>
+<!-- Content Part -->
+        <ion-content style="background-color: #062132;" class="has-header bk-fan" scroll="true" padding="true"  >
+
+            <ion-list id="news-feed-list" ng-repeat='com in comments'>
+                <ion-item class="item" >
+                    <div class="item-inner"> 
+                        <div width="60px" style="float:left;display:table; vertical-align:middle;">        
+                            <div  style="display: table-cell; vertical-align: middle;">
+                                <div ng-if="!com.FeedComment.user_image" class="item-thum"  style="background-image:url('http://sportfan-app.netsol.local/sportfan/app/webroot/img/user_profile/thumb/1433919462_user_photo.jpg'); background-size: 100% auto; border-radius: 50px;
+                                -webkit-border-radius: 50px;-moz-border-radius: 50px"></div>
+                                <div ng-if="com.FeedComment.user_image" class="item-thum"  style="background-image:url('http://sportfan-app.netsol.local/sportfan/app/webroot/img/user_profile/thumb/{{com.FeedComment.user_image}}'); background-size: 100% auto; border-radius: 50px;
+                                -webkit-border-radius: 50px;-moz-border-radius: 50px"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="item-title">{{com.FeedComment.user_name}}</div>
+                            <div width="25%" class="item-label">{{com.FeedComment.created}}</div>
+                        </div>
+                        
+                        <div class="item-desc">{{com.FeedComment.comment}}</div>
+                    </div>
+                </ion-item>
+            </ion-list> 
+        </ion-content>
+<!-- Footer Part -->        
+        <ion-footer-bar class="bar-stable item-input-inset message-footer" style="background-color:#26895B;" keyboard-attach>
+              <div style="float:left;">
+                    <img ng-if="!globals.currentUser.userimage" ng-src="http://sportfan-app.netsol.local/sportfan/app/webroot/img/user_profile/thumb/1433919462_user_photo.jpg" class="comment-bottom-image">
+                    <img ng-if="globals.currentUser.userimage" ng-src="http://sportfan-app.netsol.local/sportfan/{{globals.currentUser.userimage}}" class="comment-bottom-image">
+                </div>                                
+              <label class="item-input-wrapper">
+                  <textarea type="text" placeholder="Your Comments Here" ng-model="comment" style="width:100% !important color: #4C4C4C !important;" class="textarea" rows="3" msd-elastic></textarea>                                            
+              </label>
+              <div class="footer-btn-wrap">
+                <button ng-click="AddComents({{id}})" class="button button-icon icon ion-android-send footer-btn" type="submit" style="color: #fff;">
+                </button>
+              </div>
+          </ion-footer-bar>
+</ion-view>

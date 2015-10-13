@@ -13,6 +13,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 //angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform, feeds) { 
+
 /*feeds.teams().then(
 		  function( response ) { //console.log(response.leagues);
 				
@@ -203,7 +204,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         views: {
           'menuContent': {
             templateUrl: 'templates/myteam.html'
-            //controller: 'signupCtrl'
           }
         }
       })

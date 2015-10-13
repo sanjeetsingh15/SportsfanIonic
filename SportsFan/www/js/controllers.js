@@ -21,11 +21,13 @@ angular.module('starter.controllers', [])
 // Single Team Feeds
 .controller('teamFeedsCtrl', function($scope, $state, $ionicHistory, $stateParams, $ionicLoading, $rootScope, $timeout, feeds) {
     
-    
+    $scope.width = 32;
+    console.log($scope.width);
     //OnState Change..
     $ionicLoading.show();
     $scope.$on('$ionicView.afterEnter', function(){
         //$ionicLoading.show();
+        console.log($stateParams);
         $scope.team_id =  $stateParams.team_id;
         $scope.team_name =  $stateParams.team_name;
         $scope.team_logo =  $stateParams.team_logo;
@@ -60,12 +62,21 @@ angular.module('starter.controllers', [])
         
 		$scope.likeUnlikeFeed =function(userId,flag,feedId) {
 		    $ionicLoading.show();
-			feeds.likeUnlike(userId,flag,feedId).then(
+			
+            feeds.likeUnlike(userId,flag,feedId).then(
 				function( response ) {
 				        getTeamNewsFeed($scope.team_id);
                         $ionicLoading.hide();
 					}
-				);
+				).finally(function(){ $ionicLoading.hide();
+				    if(flag == 1){
+                        var ftxt = 'You like successfully.';
+                    } else{
+                        var ftxt = 'You Unlike successfully.';
+                    }
+                    
+				    feeds.toast(ftxt, 'sucess');
+				});
 		}
         
         // OnClick on add team..
@@ -79,7 +90,7 @@ angular.module('starter.controllers', [])
         }
     
     // Add or Remove Team..
-        function AddRemoveTeam(type,team_id){  //console.log(team_id);
+        function AddRemoveTeam(type,team_id){ console.log("teamid"); console.log(team_id); console.log("team type");console.log(type); console.log("user id");console.log($rootScope.globals.currentUser.id);
             feeds.addRemoveTeam($rootScope.globals.currentUser.id, type, team_id).then(
     		function( response ) {
     		   getTeamNewsFeed($scope.team_id); 
@@ -96,8 +107,26 @@ angular.module('starter.controllers', [])
             $ionicLoading.show();
         feeds.teamnewsfeed(team_id).then(
 		  function( response ) {
+		      
             $scope.feeds = response.feeds;
-            //console.log(response.feeds);
+            console.log("hi9");
+            console.log(response.feeds);
+            
+            try{
+                    if($rootScope.globals.currentUser.id){
+                        var h = 140;
+                    } else{
+                        var h = 98;
+                    }
+                    
+                } catch(e){ console.log(e); 
+                    var h = 98;
+                }
+                
+            $scope.feeds.width = h;
+            
+            console.log(response.feeds);
+            console.log("hi8");
            //if(response.feeds.length == 0 && $state.current.name == 'app.teamfeeds'){
 		   //  feeds.toast('No Record Found.', 'success');
 		   //}
@@ -227,10 +256,10 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('myteamCtrl', function($scope, $state, $rootScope, $ionicLoading, feeds) {
-//console.log("delll");console.log($scope.myteams);
+.controller('mysubscribeteamsCtrl', function($scope, $state, $rootScope, $ionicLoading, feeds) {
+console.log("mysubscribeteamsCtrl");//console.log($scope.myteams);
 //OnState Change..
-   $scope.$on('$ionicView.afterEnter', function(){
+   $scope.$on('$ionicView.afterEnter', function(){ console.log("afterEnter");
         $ionicLoading.show();
        // console.log("ppppp"); console.log($scope.myteams);
         MyTeamListing();
@@ -253,7 +282,7 @@ angular.module('starter.controllers', [])
     }
 
 // Add or Remove Team..
-    function AddRemoveTeam(type,team_id){ //console.log("mmm");
+    function AddRemoveTeam(type,team_id){ console.log("mmm"); console.log($rootScope.globals.currentUser.id);  console.log(type);   console.log(team_id); 
         feeds.addRemoveTeam($rootScope.globals.currentUser.id, type, team_id).then(
 		function( response ) {
            
@@ -264,14 +293,14 @@ angular.module('starter.controllers', [])
     }
 
 // List of my team..
-    function MyTeamListing(){ //console.log("eeeeeeei"); console.log($scope.myteams);
-        feeds.myteams($rootScope.globals.currentUser.id).then(
-		function( response ) {
-    		$scope.myteams = response.teams;  //console.log("hiii"); console.log($scope.myteams.length);
+    function MyTeamListing(){ console.log("my team listing"); //console.log($scope.myteams);
+        feeds.myteams($rootScope.globals.currentUser.id).then( 
+		function( response ) { console.log($scope.myteams);
+    		$scope.myteams = response.teams;  console.log("hiii"); console.log($scope.myteams.length);
             $ionicLoading.hide();
-           if(response.teams.length == 0 && $state.current.name == 'app.myteam'){
-    		  feeds.toast('No Record Found.', 'success');
-    		}
+               if(response.teams.length == 0 && $state.current.name == 'app.myteam'){
+        		  feeds.toast('No Record Found.', 'success');
+        		}
 			}
 		);
     }

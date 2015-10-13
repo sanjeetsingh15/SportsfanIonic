@@ -1,0 +1,23 @@
+<ion-view style="" title="Contact Us" ng-controller="contCtrl" >
+    <ion-nav-buttons side="right"  >
+      <i style="color: white;font-size: 24px; padding: 5px 10px 5px 10px;" class="icon ion-home" ng-click="goHome()"></i>
+    </ion-nav-buttons>
+<!-- Content area -->
+    <ion-content class="has-header bk-fan" padding="true" scroll="true">
+        <div style="width: 300px; height: 20px;" class="spacer"></div>                                                        
+        <form name="contactForm">
+        <div class="toast-container" style="    margin-top: -20px;"></div>
+            <div class="login-form">
+                <div class="row responsive-sm">
+                    <div class="col"><input placeholder="Your Name" class="text-input--underbar" type="text" name="name" value="" ng-model="name" /></div>
+                    <div class="col"><input placeholder="Your Email" class="text-input--underbar" type="email" name="email" value="" ng-model="email"  /></div>
+                    <div class="col"><textarea style="height:100px;" placeholder="Your Message Here" ng-model="message" name="message" ></textarea></div>
+                </div>
+				<div style="width: 300px; height: 15px;" class="spacer"></div>
+            </div>
+            <input type="submit" style="font-size: 24px;" class="button button-balanced button-block " name="cntSubmit" value="Send" ng-click="PostContact()" />
+            
+        </form>
+             <div style="width: 300px; height: 100px;" class="spacer"></div>               
+    </ion-content>
+</ion-view>
